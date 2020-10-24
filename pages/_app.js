@@ -26,9 +26,18 @@ function MyApp({ Component, pageProps }) {
 
         <meta name='twitter:card' content='summary_large_image' key='twcard' />
         <meta name='twitter:site' content='@bknzorg' key='twhandle' />
+        <meta
+          name='twitter:image'
+          content='https://bknz.org/bknz-twitter.png'
+          key='twimg'
+        />
 
         <meta property='og:url' content='https://bknz.org' key='ogurl' />
-        <meta property='og:image' content='/bknz.png' key='ogimage' />
+        <meta
+          property='og:image'
+          content='https://bknz.org/bknz.png'
+          key='ogimage'
+        />
         <meta property='og:site_name' content='bknz.org' key='ogsitename' />
         <meta property='og:title' content='bknz.' key='ogtitle' />
         <meta
