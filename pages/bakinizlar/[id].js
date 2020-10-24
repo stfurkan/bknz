@@ -50,7 +50,7 @@ export async function getStaticProps(context) {
   try {
     const tumBakinizlar = JSON.parse(
       fs
-        .readFileSync(`db/bakinizlar/bakinizlar.json`, 'utf8')
+        .readFileSync(`./db/bakinizlar/bakinizlar.json`, 'utf8')
         .replace(/(\r\n|\n|\r)/gm, '')
         .replace(',]', ']')
     );

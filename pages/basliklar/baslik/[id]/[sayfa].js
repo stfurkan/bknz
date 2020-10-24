@@ -96,7 +96,7 @@ export async function getStaticProps(context) {
     dosya = 'baslik7.json';
   }
 
-  const dizinDosya = `db/basliklar/baslik/${dosya}`;
+  const dizinDosya = `./db/basliklar/baslik/${dosya}`;
 
   let sayfaSayisi = 0;
   let bakinizlar = [];
@@ -116,7 +116,7 @@ export async function getStaticProps(context) {
 
     baslik = JSON.parse(
       fs
-        .readFileSync(`db/basliklar/basliklar.json`, 'utf8')
+        .readFileSync(`./db/basliklar/basliklar.json`, 'utf8')
         .replace(/(\r\n|\n|\r)/gm, '')
         .replace(',]', ']')
     ).filter(bas => bas.id === parseInt(id))[0].metin;
