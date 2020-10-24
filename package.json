@@ -3,10 +3,10 @@
   "version": "0.1.0",
   "private": true,
   "scripts": {
-    "dev": "next dev",
-    "build": "next build",
-    "start": "next start",
-    "postbuild": "next-on-netlify"
+    "dev": "set NODE_OPTIONS=--max_old_space_size=8192 && next dev",
+    "build": "set NODE_OPTIONS=--max_old_space_size=8192 && next build",
+    "start": "set NODE_OPTIONS=--max_old_space_size=8192 && next start",
+    "postbuild": "set NODE_OPTIONS=--max_old_space_size=8192 && next-on-netlify"
   },
   "dependencies": {
     "next": "9.5.5",
