@@ -3,7 +3,7 @@ import Link from 'next/link';
 
 export default function Footer() {
   return (
-    <footer className='flex flex-col text-white bg-gray-800 text-center'>
+    <div className='flex flex-col text-white bg-gray-800 text-center'>
       <div className='m-2 text-sm sm:text-base'>
         <Link href='/'>
           <a className='hover:text-gray-400'>Anasayfa</a>
@@ -22,6 +22,6 @@ export default function Footer() {
         </Link>
       </div>
       <div className='mb-2'>bknz.org © 2020</div>
-    </footer>
+    </div>
   );
 }
