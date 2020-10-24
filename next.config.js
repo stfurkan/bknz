@@ -1,5 +1,4 @@
 module.exports = {
-  builds: { src: 'db', use: '@vercel/node' },
   async redirects() {
     return [
       {
@@ -13,5 +12,6 @@ module.exports = {
         permanent: true
       }
     ];
-  }
+  },
+  target: 'serverless'
 };
