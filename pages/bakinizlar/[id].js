@@ -36,8 +36,7 @@ export async function getStaticPaths() {
       { params: { id: '8' } },
       { params: { id: '9' } },
       { params: { id: '10' } }
-    ],
-    fallback: true
+    ]
   };
 }
 
@@ -67,7 +66,6 @@ export async function getStaticProps(context) {
       bakinizlar,
       toplam,
       id
-    },
-    revalidate: 86400
+    }
   };
 }
