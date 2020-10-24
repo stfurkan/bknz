@@ -81,20 +81,46 @@ export async function getStaticProps(context) {
 
   let dosya = '';
 
-  if (id >= 1 && id < 147159) {
+  if (id >= 1 && id < 43721) {
     dosya = 'baslik1.json';
-  } else if (id >= 147159 && id < 1409045) {
+  } else if (id >= 43721 && id < 75468) {
     dosya = 'baslik2.json';
-  } else if (id >= 1409045 && id < 3125290) {
+  } else if (id >= 75468 && id < 164522) {
     dosya = 'baslik3.json';
-  } else if (id >= 3125290 && id < 4731438) {
+  } else if (id >= 164522 && id < 435159) {
     dosya = 'baslik4.json';
-  } else if (id >= 4731438 && id < 5638603) {
+  } else if (id >= 435159 && id < 970011) {
     dosya = 'baslik5.json';
-  } else if (id >= 5638603 && id < 6210173) {
+  } else if (id >= 970011 && id < 1580776) {
     dosya = 'baslik6.json';
-  } else {
+  } else if (id >= 1580776 && id < 2163075) {
     dosya = 'baslik7.json';
+  } else if (id >= 2163075 && id < 2678109) {
+    dosya = 'baslik8.json';
+  } else if (id >= 2678109 && id < 3414342) {
+    dosya = 'baslik9.json';
+  } else if (id >= 3414342 && id < 4018218) {
+    dosya = 'baslik10.json';
+  } else if (id >= 4018218 && id < 4576528) {
+    dosya = 'baslik11.json';
+  } else if (id >= 4576528 && id < 4943914) {
+    dosya = 'baslik12.json';
+  } else if (id >= 4943914 && id < 5276224) {
+    dosya = 'baslik13.json';
+  } else if (id >= 5276224 && id < 5577753) {
+    dosya = 'baslik14.json';
+  } else if (id >= 5577753 && id < 5792893) {
+    dosya = 'baslik15.json';
+  } else if (id >= 5792893 && id < 6004253) {
+    dosya = 'baslik16.json';
+  } else if (id >= 6004253 && id < 6179727) {
+    dosya = 'baslik17.json';
+  } else if (id >= 6179727 && id < 6366895) {
+    dosya = 'baslik18.json';
+  } else if (id >= 6366895 && id < 6533627) {
+    dosya = 'baslik19.json';
+  } else {
+    dosya = 'baslik20.json';
   }
 
   const bakinizlarJSON = await import(
