@@ -3,6 +3,8 @@ import { useRouter } from 'next/router';
 import Page from '../../components/Page';
 import Loading from '../../components/Loading';
 
+import basliklarJSON from '../../db/basliklar/basliklar.json';
+
 export default function Basliklar({ basliklar, toplam, id }) {
   const router = useRouter();
 
@@ -45,23 +47,8 @@ export async function getStaticPaths() {
 export async function getStaticProps(context) {
   const id = parseInt(context?.params?.id) || 1;
 
-  let basliklar = [];
-  let toplam = 0;
-
-  try {
-    const tumBasliklar = JSON.parse(
-      fs
-        .readFileSync(`./db/basliklar/basliklar.json`, 'utf8')
-        .replace(/(\r\n|\n|\r)/gm, '')
-        .replace(',]', ']')
-    );
-
-    basliklar = tumBasliklar.slice((id - 1) * 10, id * 10);
-
-    toplam = tumBasliklar.length;
-  } catch (err) {
-    console.error(err);
-  }
+  const basliklar = basliklarJSON.slice((id - 1) * 10, id * 10);
+  const toplam = basliklarJSON.length;
 
   return {
     props: {
