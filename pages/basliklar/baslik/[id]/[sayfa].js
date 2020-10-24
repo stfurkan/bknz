@@ -4,28 +4,7 @@ import InnerPagination from '../../../../components/InnerPagination';
 import Error from '../../../../components/Error';
 import Loading from '../../../../components/Loading';
 
-import bakinizlarJSON from '../../../../db/bakinizlar/bakinizlar.json';
-
-const qry = useRouter().query;
-const inId = qry?.id || 1;
-
-let baslikJSON = [];
-
-if (inId >= 1 && inId < 147159) {
-  baslikJSON = require('../../../../db/basliklar/baslik/baslik1.json');
-} else if (inId >= 147159 && inId < 1409045) {
-  baslikJSON = require('../../../../db/basliklar/baslik/baslik2.json');
-} else if (inId >= 1409045 && inId < 3125290) {
-  baslikJSON = require('../../../../db/basliklar/baslik/baslik3.json');
-} else if (inId >= 3125290 && inId < 4731438) {
-  baslikJSON = require('../../../../db/basliklar/baslik/baslik4.json');
-} else if (inId >= 4731438 && inId < 5638603) {
-  baslikJSON = require('../../../../db/basliklar/baslik/baslik5.json');
-} else if (inId >= 5638603 && inId < 6210173) {
-  baslikJSON = require('../../../../db/basliklar/baslik/baslik6.json');
-} else {
-  baslikJSON = require('../../../../db/basliklar/baslik/baslik7.json');
-}
+import basliklarJSON from '../../../../db/basliklar/basliklar.json';
 
 export default function Baslik({ baslik, bakinizlar, sayfaSayisi }) {
   const router = useRouter();
@@ -100,10 +79,32 @@ export async function getStaticProps(context) {
   const id = context?.params?.id;
   const sayfa = context?.params?.sayfa || 1;
 
-  const basliklar = baslikJSON[id];
-  const sayfaSayisi = Math.ceil(basliklar.length / 10);
-  const bakinizlar = basliklar.slice((sayfa - 1) * 10, sayfa * 10);
-  const baslik = bakinizlarJSON.filter(bas => bas.id === parseInt(id))[0].metin;
+  let dosya = '';
+
+  if (id >= 1 && id < 147159) {
+    dosya = 'baslik1.json';
+  } else if (id >= 147159 && id < 1409045) {
+    dosya = 'baslik2.json';
+  } else if (id >= 1409045 && id < 3125290) {
+    dosya = 'baslik3.json';
+  } else if (id >= 3125290 && id < 4731438) {
+    dosya = 'baslik4.json';
+  } else if (id >= 4731438 && id < 5638603) {
+    dosya = 'baslik5.json';
+  } else if (id >= 5638603 && id < 6210173) {
+    dosya = 'baslik6.json';
+  } else {
+    dosya = 'baslik7.json';
+  }
+
+  const bakinizlarJSON = await import(
+    `../../../../db/basliklar/baslik/${dosya}`
+  );
+
+  const bakinizlarTum = bakinizlarJSON[id];
+  const sayfaSayisi = Math.ceil(bakinizlarTum.length / 10);
+  const bakinizlar = bakinizlarTum.slice((sayfa - 1) * 10, sayfa * 10);
+  const baslik = basliklarJSON.filter(bas => bas.id === parseInt(id))[0].metin;
 
   return {
     props: {
