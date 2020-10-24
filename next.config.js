@@ -12,6 +12,5 @@ module.exports = {
         permanent: true
       }
     ];
-  },
-  target: 'serverless'
+  }
 };

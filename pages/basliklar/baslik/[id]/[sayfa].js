@@ -123,9 +123,11 @@ export async function getStaticProps(context) {
     dosya = 'baslik20.json';
   }
 
-  const bakinizlarJSON = await import(
-    `../../../../db/basliklar/baslik/${dosya}`
+  const bakinizlarJSONRes = await fetch(
+    `https://bknzdb.netlify.app/basliklar/baslik/${dosya}`
   );
+
+  const bakinizlarJSON = await bakinizlarJSONRes.json();
 
   const bakinizlarTum = bakinizlarJSON[id];
   const sayfaSayisi = Math.ceil(bakinizlarTum.length / 10);

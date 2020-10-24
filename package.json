@@ -3,14 +3,12 @@
   "version": "0.1.0",
   "private": true,
   "scripts": {
-    "dev": "set NODE_OPTIONS=--max_old_space_size=8192 && next dev",
-    "build": "set NODE_OPTIONS=--max_old_space_size=8192 && next build",
-    "start": "set NODE_OPTIONS=--max_old_space_size=8192 && next start",
-    "postbuild": "set NODE_OPTIONS=--max_old_space_size=8192 && next-on-netlify"
+    "dev": "next dev",
+    "build": "next build",
+    "start": "next start"
   },
   "dependencies": {
     "next": "9.5.5",
-    "next-on-netlify": "^2.5.2",
     "nprogress": "^0.2.0",
     "react": "16.13.1",
     "react-dom": "16.13.1"
