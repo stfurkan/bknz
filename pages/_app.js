@@ -24,7 +24,7 @@ function MyApp({ Component, pageProps }) {
           content="Ekşi Sözlük'te bulunan bakınızları ve başlıkları listeleyen açık kaynak kodlu bir proje"
         />
 
-        <meta name='twitter:card' content='summary' key='twcard' />
+        <meta name='twitter:card' content='summary_large_image' key='twcard' />
         <meta name='twitter:creator' content='@bknzorg' key='twhandle' />
         <meta name='twitter:image' content='/bknz.png' key='twimg' />
 
