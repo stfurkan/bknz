@@ -25,7 +25,7 @@ function MyApp({ Component, pageProps }) {
         />
 
         <meta name='twitter:card' content='summary_large_image' key='twcard' />
-        <meta name='twitter:creator' content='@bknzorg' key='twhandle' />
+        <meta name='twitter:site' content='@bknzorg' key='twhandle' />
         <meta name='twitter:image' content='/bknz.png' key='twimg' />
 
         <meta property='og:url' content='https://bknz.org' key='ogurl' />
