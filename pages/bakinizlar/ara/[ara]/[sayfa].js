@@ -1,7 +1,8 @@
-import fs from 'fs';
 import { useRouter } from 'next/router';
 import Search from '../../../../components/Search';
 import Loading from '../../../../components/Loading';
+
+import bakinizlarJSON from '../../../../db/bakinizlar/bakinizlar.json';
 
 export default function BakinizArama({ bakinizlar, toplam, id }) {
   const router = useRouter();
@@ -33,27 +34,12 @@ export async function getStaticPaths() {
 export async function getStaticProps(context) {
   const id = parseInt(context?.params?.sayfa) || 1;
 
-  let bakinizlar = [];
-  let toplam = 0;
+  const filtreBakinizlar = bakinizlarJSON.filter(bak =>
+    bak.metin.includes(context.params.ara.toLowerCase())
+  );
 
-  try {
-    const tumBakinizlar = JSON.parse(
-      fs
-        .readFileSync(`./db/bakinizlar/bakinizlar.json`, 'utf8')
-        .replace(/(\r\n|\n|\r)/gm, '')
-        .replace(',]', ']')
-    );
-
-    const filtreBakinizlar = tumBakinizlar.filter(bak =>
-      bak.metin.includes(context.params.ara.toLowerCase())
-    );
-
-    bakinizlar = filtreBakinizlar.slice((id - 1) * 10, id * 10);
-
-    toplam = filtreBakinizlar.length;
-  } catch (err) {
-    console.error(err);
-  }
+  const bakinizlar = filtreBakinizlar.slice((id - 1) * 10, id * 10);
+  const toplam = filtreBakinizlar.length;
 
   return {
     props: {

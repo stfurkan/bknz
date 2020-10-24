@@ -1,7 +1,8 @@
-import fs from 'fs';
 import { useRouter } from 'next/router';
 import Search from '../../../../components/Search';
 import Loading from '../../../../components/Loading';
+
+import basliklarJSON from '../../../../db/basliklar/basliklar.json';
 
 export default function BaslikArama({ basliklar, toplam, id }) {
   const router = useRouter();
@@ -33,27 +34,12 @@ export async function getStaticPaths() {
 export async function getStaticProps(context) {
   const id = parseInt(context?.params?.sayfa) || 1;
 
-  let basliklar = [];
-  let toplam = 0;
+  const filtreBasliklar = basliklarJSON.filter(bas =>
+    bas.metin.includes(context.params.ara.toLowerCase())
+  );
 
-  try {
-    const tumBasliklar = JSON.parse(
-      fs
-        .readFileSync(`./db/basliklar/basliklar.json`, 'utf8')
-        .replace(/(\r\n|\n|\r)/gm, '')
-        .replace(',]', ']')
-    );
-
-    const filtreBasliklar = tumBasliklar.filter(bas =>
-      bas.metin.includes(context.params.ara.toLowerCase())
-    );
-
-    basliklar = filtreBasliklar.slice((id - 1) * 10, id * 10);
-
-    toplam = filtreBasliklar.length;
-  } catch (err) {
-    console.error(err);
-  }
+  const basliklar = filtreBasliklar.slice((id - 1) * 10, id * 10);
+  const toplam = filtreBasliklar.length;
 
   return {
     props: {

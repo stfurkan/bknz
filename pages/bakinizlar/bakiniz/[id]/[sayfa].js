@@ -1,9 +1,31 @@
-import fs from 'fs';
 import Head from 'next/head';
 import { useRouter } from 'next/router';
 import InnerPagination from '../../../../components/InnerPagination';
 import Error from '../../../../components/Error';
 import Loading from '../../../../components/Loading';
+
+import basliklarJSON from '../../../../db/basliklar/basliklar.json';
+
+const qry = useRouter().query;
+const inId = qry?.id || 1;
+
+let bakinizJSON = [];
+
+if (inId >= 1 && inId < 4120) {
+  bakinizJSON = require('../../../../db/bakinizlar/bakiniz/bakiniz1.json');
+} else if (inId >= 4120 && inId < 10322) {
+  bakinizJSON = require('../../../../db/bakinizlar/bakiniz/bakiniz2.json');
+} else if (inId >= 10322 && inId < 21184) {
+  bakinizJSON = require('../../../../db/bakinizlar/bakiniz/bakiniz3.json');
+} else if (inId >= 21184 && inId < 41034) {
+  bakinizJSON = require('../../../../db/bakinizlar/bakiniz/bakiniz4.json');
+} else if (inId >= 41034 && inId < 95990) {
+  bakinizJSON = require('../../../../db/bakinizlar/bakiniz/bakiniz5.json');
+} else if (inId >= 95990 && inId < 415290) {
+  bakinizJSON = require('../../../../db/bakinizlar/bakiniz/bakiniz6.json');
+} else {
+  bakinizJSON = require('../../../../db/bakinizlar/bakiniz/bakiniz7.json');
+}
 
 export default function Bakiniz({ bakiniz, basliklar, sayfaSayisi }) {
   const router = useRouter();
@@ -78,51 +100,10 @@ export async function getStaticProps(context) {
   const id = context?.params?.id;
   const sayfa = context?.params?.sayfa || 1;
 
-  let dosya = '';
-
-  if (id >= 1 && id < 4120) {
-    dosya = 'bakiniz1.json';
-  } else if (id >= 4120 && id < 10322) {
-    dosya = 'bakiniz2.json';
-  } else if (id >= 10322 && id < 21184) {
-    dosya = 'bakiniz3.json';
-  } else if (id >= 21184 && id < 41034) {
-    dosya = 'bakiniz4.json';
-  } else if (id >= 41034 && id < 95990) {
-    dosya = 'bakiniz5.json';
-  } else if (id >= 95990 && id < 415290) {
-    dosya = 'bakiniz6.json';
-  } else {
-    dosya = 'bakiniz7.json';
-  }
-
-  const dizinDosya = `./db/bakinizlar/bakiniz/${dosya}`;
-
-  let sayfaSayisi = 0;
-  let basliklar = [];
-  let bakiniz = '';
-
-  try {
-    const basliklarTum = JSON.parse(
-      fs
-        .readFileSync(dizinDosya, 'utf8')
-        .replace(/(\r\n|\n|\r)/gm, '')
-        .replace(',]', ']')
-    )[id];
-
-    sayfaSayisi = Math.ceil(basliklarTum.length / 10);
-
-    basliklar = basliklarTum.slice((sayfa - 1) * 10, sayfa * 10);
-
-    bakiniz = JSON.parse(
-      fs
-        .readFileSync(`./db/bakinizlar/bakinizlar.json`, 'utf8')
-        .replace(/(\r\n|\n|\r)/gm, '')
-        .replace(',]', ']')
-    ).filter(bak => bak.id === parseInt(id))[0].metin;
-  } catch (err) {
-    console.error(err);
-  }
+  const bakinizlar = bakinizJSON[id];
+  const sayfaSayisi = Math.ceil(bakinizlar.length / 10);
+  const basliklar = bakinizlar.slice((sayfa - 1) * 10, sayfa * 10);
+  const bakiniz = basliklarJSON.filter(bak => bak.id === parseInt(id))[0].metin;
 
   return {
     props: {
